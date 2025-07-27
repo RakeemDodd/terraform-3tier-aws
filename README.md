@@ -28,7 +28,7 @@ To SSH into the instance:
 ```bash
 chmod 400 rakeem-3tier-key.pem
 ssh -i rakeem-3tier-key.pem ec2-user@<public-ip-address>
-🔐 You must replace <public-ip-address> with the actual IP from the Terraform output.
+You must replace <public-ip-address> with the actual IP from the Terraform output.
 
 
 ## Files Overview
