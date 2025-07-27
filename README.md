@@ -19,8 +19,8 @@ Includes:
 | File | Purpose |
 |------|---------|
 | `main.tf` | Core infrastructure config (VPC module setup) |
-| `variables.tf` | (Coming Soon) Input variables for cleaner structure |
-| `outputs.tf` | (Coming Soon) Useful outputs like VPC ID |
+| `variables.tf` | Input variables |
+| `outputs.tf` | Output variables |
 | `terraform.tfvars` | Values for variables (not committed) |
 | `.gitignore` | Ignores `.terraform/` and other local files |
 
