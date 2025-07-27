@@ -37,7 +37,9 @@ You must replace <public-ip-address> with the actual IP from the Terraform outpu
 |------|---------|
 | `main.tf` | Core infrastructure config (VPC + NAT Gateway configuration) |
 | `variables.tf` | Input variables for modules |
-| `outputs.tf` | Output values like public subnet IDs and EC2 public IP | | `ec2.tf` | EC2 instance deployment module | | `security.tf` | SSH rule attached to the VPC's default security group |
+| `outputs.tf` | Output values like public subnet IDs and EC2 public IP |
+| `ec2.tf` | EC2 instance deployment module |
+| `security.tf` | SSH rule attached to the VPC's default security group |
 | `terraform.tfvars` | Overrides for the input variables (ignored in Git) |
 | `.gitignore` | Ignores `.terraform/` and other local files |
 
