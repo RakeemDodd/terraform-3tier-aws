@@ -21,7 +21,7 @@ Includes:
 | `main.tf` | Core infrastructure config (VPC module setup) |
 | `variables.tf` | Input variables |
 | `outputs.tf` | Output variables |
-| `terraform.tfvars` | Values for variables (not committed) |
+| `terraform.tfvars` | Values for overriding variables (ignored in Git)|
 | `.gitignore` | Ignores `.terraform/` and other local files |
 
 ## 📌 Next Steps
