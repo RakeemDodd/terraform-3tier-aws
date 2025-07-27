@@ -1,6 +1,6 @@
 # Terraform 3-Tier Infrastructure – Project
 
-This project is the starting point for building a 3-tier infrastructure on AWS using [official Terraform modules](https://github.com/terraform-aws-modules). It's designed to grow into a full environment with VPC, EC2, RDS, and ALB.
+This project showcases a modular, production-ready 3-tier infrastructure on AWS using official Terraform modules. It includes VPC, EC2, RDS, and ALB components, following best practices for scalability and maintainability.
 
 ## Current Status (Phase 1)
 
@@ -28,7 +28,8 @@ To SSH into the instance:
 ```bash
 chmod 400 rakeem-3tier-key.pem
 ssh -i rakeem-3tier-key.pem ec2-user@<public-ip-address>
-You must replace <public-ip-address> with the actual IP from the Terraform output.
+You must replace <public-ip-address> with the actual IP from the Terraform output. 
+```
 
 ## Files Overview
 
