@@ -2,7 +2,7 @@
 
 This project showcases a modular, production-ready 3-tier infrastructure on AWS using official Terraform modules. It includes VPC, EC2, RDS, and ALB components, following best practices for scalability and maintainability.
 
-## Current Status (Phase 1)
+## Current Status
 
 **VPC Created Using Module:**
 - [terraform-aws-modules/vpc/aws](https://github.com/terraform-aws-modules/terraform-aws-vpc)
