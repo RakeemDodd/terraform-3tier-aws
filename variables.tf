@@ -38,6 +38,11 @@ variable "instance_type" {
 
 variable "key_name" {
   description = "SSH key pair name from AWS"
-  default     = "rakeem-3tier-key" 
+  default     = "rakeem-3tier-key"
 }
 
+variable "db_password" {
+  description = "RDS DB master password"
+  type        = string
+  sensitive   = true
+}

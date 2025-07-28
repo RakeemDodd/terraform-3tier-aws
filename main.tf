@@ -12,12 +12,12 @@ module "vpc" {
   private_subnets = var.private_subnets
   public_subnets  = var.public_subnets
 
-  enable_nat_gateway = true
-  single_nat_gateway = false
-  reuse_nat_ips      = true
+  enable_nat_gateway  = true
+  single_nat_gateway  = false
+  reuse_nat_ips       = true
   external_nat_ip_ids = aws_eip.nat[*].id
 
-  enable_vpn_gateway = false
+  enable_vpn_gateway      = false
   map_public_ip_on_launch = true
 
   tags = {

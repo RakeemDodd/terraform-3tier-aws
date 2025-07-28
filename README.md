@@ -13,7 +13,9 @@ Includes:
 - NAT Gateway with Elastic IPs
 - Internet Gateway and route tables
 - VPN Gateway disabled
-- Tags and structure ready for expansion  **EC2 Instance Added Using Module:**
+- Tags and structure ready for expansion
+
+**EC2 Instance Added Using Module:**
 - [terraform-aws-modules/ec2-instance/aws](https://github.com/terraform-aws-modules/terraform-aws-ec2-instance)
 
 Details:
@@ -31,6 +33,17 @@ ssh -i rakeem-3tier-key.pem ec2-user@<public-ip-address>
 You must replace <public-ip-address> with the actual IP from the Terraform output. 
 ```
 
+**RDS – MySQL Database:**
+- [`terraform-aws-modules/rds/aws`](https://github.com/terraform-aws-modules/terraform-aws-rds)
+
+Configuration:
+- MySQL 5.7 DB instance
+- Hosted in a private subnet (for security)
+- Master user: `rdadmin`
+- Password: managed via `terraform.tfvars` (NOT committed)
+- Public accessibility: disabled
+- Connection tested and verified via EC2
+
 ## Files Overview
 
 | File | Purpose |
@@ -39,22 +52,20 @@ You must replace <public-ip-address> with the actual IP from the Terraform outpu
 | `variables.tf` | Input variables for modules |
 | `outputs.tf` | Output values like public subnet IDs and EC2 public IP |
 | `ec2.tf` | EC2 instance deployment module |
-| `security.tf` | SSH rule attached to the VPC's default security group |
+| `rds.tf` | RDS instance config |
+| `security.tf` | Security group rules (SSH & DB access) |
 | `terraform.tfvars` | Overrides for the input variables (ignored in Git) |
-| `.gitignore` | Ignores `.terraform/` and other local files |
-
+| `.gitignore` | Ignores `.terraform/` and other local files - Keeps state, secrets, and cache files out of Git |
 
 ## Next Steps
 
 Planned module additions:
-- [RDS](https://github.com/terraform-aws-modules/terraform-aws-rds)
 - [Application Load Balancer](https://github.com/terraform-aws-modules/terraform-aws-alb)
+- Goal: Load balance across a future Auto Scaling Group or containerized workload
 
-Each will be integrated as new modules into this same project to create a complete 3-tier app-ready architecture.
+## Project Purpose
 
-## Notes
-
-This README and the project structure will evolve as more services are added.
+This is part of my AI Cloud Architect career blueprint — showcasing Infrastructure as Code (IaC) skills using Terraform, AWS best practices, and real-world scenarios.
 
 ---
 

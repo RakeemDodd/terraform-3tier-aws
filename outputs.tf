@@ -18,3 +18,11 @@ output "ec2_public_ip" {
   value = module.ec2_instance.public_ip
 }
 
+output "rds_endpoint" {
+  description = "The RDS endpoint address"
+  value       = module.rds.db_instance_endpoint
+}
+
+output "ec2_private_ip" {
+  value = module.ec2_instance.private_ip
+}
