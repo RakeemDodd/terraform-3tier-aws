@@ -2,9 +2,7 @@
 
 This project showcases a modular, production-ready 3-tier infrastructure on AWS using official Terraform modules. It includes VPC, EC2, RDS, and ALB components, following best practices for scalability and maintainability.
 
-## Current Status
-
-**VPC Created Using Module:**
+## VPC Created Using Module:
 - [terraform-aws-modules/vpc/aws](https://github.com/terraform-aws-modules/terraform-aws-vpc)
 
 Includes:
@@ -15,7 +13,7 @@ Includes:
 - VPN Gateway disabled
 - Tags and structure ready for expansion
 
-**EC2 Instance Added Using Module:**
+## EC2 Instance Added Using Module:
 - [terraform-aws-modules/ec2-instance/aws](https://github.com/terraform-aws-modules/terraform-aws-ec2-instance)
 
 Details:
@@ -24,7 +22,7 @@ Details:
 - Public IP auto-assigned
 - Security group rule created to allow SSH (port 22) from your IP
 
-## SSH Access Guide
+**SSH Access Guide**
 
 To SSH into the instance:
 ```bash
@@ -33,7 +31,7 @@ ssh -i rakeem-3tier-key.pem ec2-user@<public-ip-address>
 You must replace <public-ip-address> with the actual IP from the Terraform output. 
 ```
 
-**RDS – MySQL Database:**
+## RDS – MySQL Database:
 - [`terraform-aws-modules/rds/aws`](https://github.com/terraform-aws-modules/terraform-aws-rds)
 
 Configuration:
