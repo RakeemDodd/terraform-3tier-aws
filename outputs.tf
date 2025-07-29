@@ -26,3 +26,8 @@ output "rds_endpoint" {
 output "ec2_private_ip" {
   value = module.ec2_instance.private_ip
 }
+
+output "alb_dns_name" {
+  description = "DNS name of the ALB"
+  value       = module.alb.dns_name
+}

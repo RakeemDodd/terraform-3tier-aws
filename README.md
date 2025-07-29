@@ -1,72 +1,140 @@
-# Terraform 3-Tier Infrastructure – Project
+# 🏗️ Terraform 3-Tier Infrastructure Project
 
-This project showcases a modular, production-ready 3-tier infrastructure on AWS using official Terraform modules. It includes VPC, EC2, RDS, and ALB components, following best practices for scalability and maintainability.
-
-## VPC Created Using Module:
-- [terraform-aws-modules/vpc/aws](https://github.com/terraform-aws-modules/terraform-aws-vpc)
-
-Includes:
-- Custom CIDR block
-- Public & Private subnets across 3 AZs
-- NAT Gateway with Elastic IPs
-- Internet Gateway and route tables
-- VPN Gateway disabled
-- Tags and structure ready for expansion
-
-## EC2 Instance Added Using Module:
-- [terraform-aws-modules/ec2-instance/aws](https://github.com/terraform-aws-modules/terraform-aws-ec2-instance)
-
-Details:
-- Amazon Linux 2 instance in public subnet
-- SSH access via key pair (`rakeem-3tier-key`)
-- Public IP auto-assigned
-- Security group rule created to allow SSH (port 22) from your IP
-
-**SSH Access Guide**
-
-To SSH into the instance:
-```bash
-chmod 400 rakeem-3tier-key.pem
-ssh -i rakeem-3tier-key.pem ec2-user@<public-ip-address>
-You must replace <public-ip-address> with the actual IP from the Terraform output. 
-```
-
-## RDS – MySQL Database:
-- [`terraform-aws-modules/rds/aws`](https://github.com/terraform-aws-modules/terraform-aws-rds)
-
-Configuration:
-- MySQL 5.7 DB instance
-- Hosted in a private subnet (for security)
-- Master user: `rdadmin`
-- Password: managed via `terraform.tfvars` (NOT committed)
-- Public accessibility: disabled
-- Connection tested and verified via EC2
-
-## Files Overview
-
-| File | Purpose |
-|------|---------|
-| `main.tf` | Core infrastructure config (VPC + NAT Gateway configuration) |
-| `variables.tf` | Input variables for modules |
-| `outputs.tf` | Output values like public subnet IDs and EC2 public IP |
-| `ec2.tf` | EC2 instance deployment module |
-| `rds.tf` | RDS instance config |
-| `security.tf` | Security group rules (SSH & DB access) |
-| `terraform.tfvars` | Overrides for the input variables (ignored in Git) |
-| `.gitignore` | Ignores `.terraform/` and other local files - Keeps state, secrets, and cache files out of Git |
-
-## Next Steps
-
-Planned module additions:
-- [Application Load Balancer](https://github.com/terraform-aws-modules/terraform-aws-alb)
-- Goal: Load balance across a future Auto Scaling Group or containerized workload
-
-## Project Purpose
-
-This is part of my AI Cloud Architect career blueprint — showcasing Infrastructure as Code (IaC) skills using Terraform, AWS best practices, and real-world scenarios.
+This project showcases a modular, production-ready 3-tier infrastructure on **AWS** using official Terraform modules. It includes **VPC**, **EC2**, **RDS**, and **ALB** components, following best practices for scalability, security, and maintainability.
 
 ---
 
-### Author
+## 🔹 VPC (Virtual Private Cloud)
 
-Rakeem Dodd – [GitHub Profile](https://github.com/RakeemDodd)
+**Module Used:** [`terraform-aws-modules/vpc/aws`](https://github.com/terraform-aws-modules/terraform-aws-vpc)
+
+Includes:
+
+- Custom CIDR block (`10.0.0.0/16`)
+- Public & private subnets across 3 Availability Zones
+- Internet Gateway & NAT Gateways (1 per AZ)
+- Elastic IPs for NAT
+- Route tables per subnet
+- VPN Gateway disabled
+- Modular structure and tagging
+
+---
+
+## 🔹 EC2 Instance
+
+**Module Used:** [`terraform-aws-modules/ec2-instance/aws`](https://github.com/terraform-aws-modules/terraform-aws-ec2-instance)
+
+Features:
+
+- Amazon Linux 2 in a public subnet
+- Public IP auto-assigned
+- SSH access enabled (via `.pem` key – not committed)
+- Custom EC2 security group
+- Verified connectivity to RDS
+
+---
+
+## 🔹 RDS – MySQL Database
+
+**Module Used:** [`terraform-aws-modules/rds/aws`](https://github.com/terraform-aws-modules/terraform-aws-rds)
+
+Config:
+
+- MySQL 5.7 deployed in private subnets
+- Public access: **Disabled**
+- Master username stored via variables
+- Password stored securely in `terraform.tfvars` (not committed)
+- Verified EC2-to-RDS connectivity on port 3306
+
+---
+
+## 🔹 Application Load Balancer (ALB)
+
+**Module Used:** [`terraform-aws-modules/alb/aws`](https://github.com/terraform-aws-modules/terraform-aws-alb)
+
+Details:
+
+- ALB spans public subnets
+- Listens on port 80 (HTTP)
+- Targets EC2 instance via target group
+- Ingress: HTTP (0.0.0.0/0), Egress: all traffic
+- DNS output provided via Terraform
+
+---
+
+## 📦 Terraform Outputs (Example)
+
+| Output             | Value                                |
+|--------------------|--------------------------------------|
+| `vpc_id`           | `vpc-xxxxxxxxxxxxxxxxx`              |
+| `public_subnets`   | `["subnet-xxxx", "subnet-xxxx"]`     |
+| `private_subnets`  | `["subnet-yyyy", "subnet-yyyy"]`     |
+| `ec2_public_ip`    | `<your-ec2-ip>`                      |
+| `rds_endpoint`     | `your-db-endpoint.amazonaws.com:3306`|
+| `alb_dns_name`     | `your-alb-dns.amazonaws.com`         |
+
+---
+
+## 🗂️ Project File Structure
+
+| File             | Description                                      |
+|------------------|--------------------------------------------------|
+| `main.tf`        | VPC & networking setup                           |
+| `alb.tf`         | ALB definition and listener rules                |
+| `ec2.tf`         | EC2 instance deployment                          |
+| `rds.tf`         | RDS MySQL configuration                          |
+| `security.tf`    | Security groups for all services                 |
+| `outputs.tf`     | Terraform outputs                                |
+| `variables.tf`   | Input variables                                  |
+| `terraform.tfvars` | Sensitive values (excluded from Git)          |
+| `provider.tf`    | Provider setup and region                        |
+| `.gitignore`     | Excludes sensitive and generated files           |
+
+---
+
+## ✅ Project Status
+
+- ✅ Infrastructure deployed successfully via Terraform
+- ✅ Modular, reusable, production-ready
+- ✅ EC2 ↔ RDS connection verified
+- ✅ ALB tested with DNS
+- ⚙️ Ready for ASG, HTTPS, and CloudWatch expansion
+
+---
+
+## 🔒 Security Notes
+
+> **Important:** This project does **not** include:
+> - `.pem` private keys  
+> - `terraform.tfvars`  
+> - `.terraform/` state or backend files  
+> - Any committed secrets
+
+Use `.gitignore` and secure secrets properly when deploying in real environments.
+
+---
+
+## 🔄 Next Steps
+
+- [ ] Add Auto Scaling Group (ASG) for EC2
+- [ ] Enable HTTPS via ACM + ALB listeners
+- [ ] Add CloudWatch monitoring/logging
+- [ ] Prepare for ECS/EKS integration (future)
+
+---
+
+## 📌 Project Purpose
+
+This is part of my **AI Cloud Architect career blueprint**. It demonstrates hands-on experience with:
+
+- Infrastructure as Code (IaC) using Terraform
+- Secure and scalable AWS deployments
+- Real-world, job-ready cloud architecture
+- Best practices with reusable official modules
+
+---
+
+## 👤 Author
+
+**Rakeem Dodd**  
+🔗 [GitHub Profile](https://github.com/rakeemdodd)

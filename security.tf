@@ -30,6 +30,16 @@ resource "aws_security_group_rule" "allow_ssh" {
   description       = "Allow SSH from my IP"
 }
 
+resource "aws_security_group_rule" "allow_http" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.ec2_sg.id
+  description       = "Allow HTTP from ALB or anywhere"
+}
+
 resource "aws_security_group_rule" "allow_mysql_from_ec2_to_rds" {
   type                     = "ingress"
   from_port                = 3306
