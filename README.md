@@ -122,6 +122,7 @@ Use `.gitignore` and secure secrets properly when deploying in real environments
 - terraform destroy to tear down
 
 Goal:
+
 	•	Terminate EC2 instances
 	•	Delete ALB, listeners, target groups
 	•	Destroy RDS database and subnet group
