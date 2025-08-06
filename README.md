@@ -114,6 +114,36 @@ Use `.gitignore` and secure secrets properly when deploying in real environments
 
 ---
 
+## 🔄 Terraform Lifecycle
+
+> **Important:** This project supports full lifecycle automation for infrastructure provisioning and teardown using Terraform.
+
+- terraform apply to deploy
+- terraform destroy to tear down
+
+Goal:
+	•	Terminate EC2 instances
+	•	Delete ALB, listeners, target groups
+	•	Destroy RDS database and subnet group
+	•	Release Elastic IPs and NAT gateways
+	•	Delete subnets, route tables, and the VPC
+	•	Tear down all associated security groups and IAM roles
+    •	Able to automate infrastructure creation and deletion
+
+Note:
+
+- Created output.txt containing my entire destroy log — useful for documentation and debugging.
+- Disable Deletion Protection (if enabled)
+
+
+Screenshots & Documentation:
+- 📷 Screenshots of AWS resources in the console (VPC, EC2, RDS, ALB)
+- 📷 Billing page to confirm no charges remain (especially RDS and NAT Gateway)
+- 📄 output.txt logs saved to GitHub or local for reference
+- ✅ Use these for documentation, proof of teardown, or portfolio evidence
+
+---
+
 ## 🔄 Next Steps
 
 - [ ] Add Auto Scaling Group (ASG) for EC2
