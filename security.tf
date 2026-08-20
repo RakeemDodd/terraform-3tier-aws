@@ -25,7 +25,7 @@ resource "aws_security_group_rule" "allow_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = ["67.83.164.99/32"]
+  cidr_blocks       = ["YOUR_IP_HERE/32"]
   security_group_id = aws_security_group.ec2_sg.id
   description       = "Allow SSH from my IP"
 }
